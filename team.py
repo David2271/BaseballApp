@@ -7,10 +7,10 @@ def run():
     #region Sidebar code
     team1_index = st.sidebar.selectbox('Select Team 1', options=range(0, len(st.session_state['allTeams'])),
                                               format_func=lambda x: st.session_state['allTeams'][x]['name'],
-                                              key='team1selectbox')
+                                              key='team1selectbox', index=1)
     team2_index = st.sidebar.selectbox('Select Team 2', options=range(0, len(st.session_state['allTeams'])),
                                               format_func=lambda x: st.session_state['allTeams'][x]['name'],
-                                              key='team2selectbox')
+                                              key='team2selectbox', index=2)
     st.sidebar.divider()
 
     st.sidebar.write('<h1>Team Stats<h1>', unsafe_allow_html=True)

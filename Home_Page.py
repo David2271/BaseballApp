@@ -2,6 +2,9 @@ import streamlit as st
 import statsapi
 import team
 import player
+import Roster_Lookup
+import Team_WinLoss_Ratio
+import Lookup_by_Date
 
 
 def main():
@@ -21,17 +24,21 @@ def run_page():
     st.set_page_config(page_title='Baseball Predictor', layout='wide')
 
     st.header("Baseball Predictor", False)
-    st.write('Use the menu on the left to select to predict the outcome of a Team v. Team Matchup or a Player v. Player Matchup')
+    st.write('Use the menu on the left to select to predict the outcome of a Team v. Team Matchup, see the Win-Loss Ratio of a team, lookup a team\'s roster, or lookup a match by date.')
     st.divider()
     
     select_prediction = st.sidebar.selectbox('Select Prediction Type',
-                                    ['Team v. Team', 'Player v. Player', 'About'])
+                                    ['Team v. Team', 'Win-Loss Ratio', 'Roster Lookup', 'Game Lookup', 'About'])
     st.sidebar.divider()
     
     if select_prediction == 'Team v. Team':
         team.run()
-    elif select_prediction == 'Player v. Player':
-        player.run()
+    elif select_prediction == 'Win-Loss Ratio':
+        Team_WinLoss_Ratio.run()
+    elif select_prediction == 'Roster Lookup':
+        Roster_Lookup.run()
+    elif select_prediction == 'Game Lookup':
+        Lookup_by_Date.run()
     else:
         pass
 
