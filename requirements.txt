@@ -1,4 +1,4 @@
 mlb-statsapi
-pickle
 pandas
 scikit-learn
+numpy==1.26.4
