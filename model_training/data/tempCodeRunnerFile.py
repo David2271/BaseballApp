@@ -1,0 +1,1 @@
+data = statsapi.boxscore_data(gameID)
