@@ -1,21 +1,12 @@
 import streamlit as st
 import statsapi
 import team
-import player
 import Roster_Lookup
 import Team_WinLoss_Ratio
 import Lookup_by_Date
 
 
 def main():
-    #if 'team1' not in st.session_state:
-        #st.session_state['team1'] = None
-    #if 'team2' not in st.session_state:
-        #st.session_state['team2'] = None
-    #if 'player1' not in st.session_state:
-        #st.session_state['player1'] = None
-    #if 'player2' not in st.session_state:
-        #st.session_state['player2'] = None
     if 'allTeams' not in st.session_state:
         st.session_state['allTeams'] = statsapi.get('teams', {'sportId' : 1})['teams']
 
@@ -27,7 +18,7 @@ def run_page():
     st.write('Use the menu on the left to select to predict the outcome of a Team v. Team Matchup, see the Win-Loss Ratio of a team, lookup a team\'s roster, or lookup a match by date.')
     st.divider()
     
-    select_prediction = st.sidebar.selectbox('Select Prediction Type',
+    select_prediction = st.sidebar.selectbox('Select Functionality',
                                     ['Team v. Team', 'Win-Loss Ratio', 'Roster Lookup', 'Game Lookup', 'About'])
     st.sidebar.divider()
     

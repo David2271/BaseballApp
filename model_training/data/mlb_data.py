@@ -18,7 +18,6 @@ def main(year):
         counter += 1
         if dat is not None:
             y = 0
-            #winner = get_winning_team_id(game[2])
             if game[2] >= game[3]:
                 y = 1
             try:
@@ -34,9 +33,9 @@ def main(year):
                 print('Error in append at game', game)
                 continue
         break
-    #df = pd.DataFrame([x[1] for x in all_data], index=[y[0] for y in all_data])
-    #df.index.name = 'game_id'
-    #df.to_csv('data.csv')
+    df = pd.DataFrame([x[1] for x in all_data], index=[y[0] for y in all_data])
+    df.index.name = 'game_id'
+    df.to_csv('data.csv')
         
 
 def get_all_games(year):
@@ -49,7 +48,6 @@ def get_team_stats(team1_ID, team2_ID, game_amt, game_date):
     team1_stats = get_game_stats(team1_ID, team1_games, True)
     team2_games = get_last_x_games(team2_ID, game_amt, game_date)
     team2_stats = get_game_stats(team2_ID, team2_games, False)
-
     if team1_stats == -1 or team2_stats == -1:
         return None
     return (team1_stats, team2_stats)
@@ -60,7 +58,6 @@ def get_last_x_games(teamID, game_amt, game_date):
     new_date = datetime.datetime.strptime(d, '%m/%d/%Y')
     start_date = (new_date - datetime.timedelta(days=365)).strftime('%m/%d/%Y')
     end_date = (new_date - datetime.timedelta(days=1)).strftime('%m/%d/%Y')
-    #print(start_date)
     games = statsapi.schedule(team=teamID, start_date=start_date, end_date=end_date)
     return [x['game_id'] for x in games[-game_amt:]]
 
@@ -77,9 +74,7 @@ def get_game_stats(teamID, gameIDs, first_team):
     total_stats_dict[f'{team_num}wins'] = 0
     averaged_stats_list = []
     for gameID in gameIDs:
-        #print(gameID)
         data = statsapi.boxscore_data(gameID)
-        #print(data)
         if data['home']['team']['id'] == teamID:
             teamha = 'home'
         elif data['away']['team']['id'] == teamID:
@@ -104,7 +99,6 @@ def get_game_stats(teamID, gameIDs, first_team):
         total_stats_dict[entry] = float(total_stats_dict[entry]/game_count)
     sorted_keys = sorted(total_stats_dict.keys())
     for val in sorted_keys:
-        #print(val)
         averaged_stats_list.append(total_stats_dict[val])
     return averaged_stats_list
 
